@@ -1,6 +1,6 @@
 "use client"
 
-import { FunctionComponent } from "react"
+import { FunctionComponent, useEffect, useState } from "react"
 import Container from "@/components/ui/container"
 import useCart from "@/hooks/use-card"
 import CartItem from "./components/cart-item"
@@ -9,7 +9,14 @@ import Summary from "./components/summary"
 interface CartPageProps {}
 
 const CartPage: FunctionComponent<CartPageProps> = () => {
+  const [isMounted, setIsMounted] = useState(false)
   const cart = useCart()
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) return null
 
   return (
     <div className="bg-white">
